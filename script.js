@@ -1,6 +1,5 @@
- document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
- 
   // SURPRISE BUTTON
   const surpriseButton = document.getElementById("surpriseButton");
   const surpriseMessage = document.getElementById("surpriseMessage");
@@ -10,94 +9,62 @@
       surpriseMessage.textContent =
         "You are one of my favourite parts of life. ♡";
 
-      
-createHearts() {
-  // Remove an old animation layer if one exists
-  const oldLayer = document.getElementById("loveExplosion");
-  if (oldLayer) oldLayer.remove();
-
-  // Create a full-screen layer
-  const layer = document.createElement("div");
-  layer.id = "loveExplosion";
-
-  layer.style.cssText = `
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 2147483647;
-  `;
-
-  document.body.appendChild(layer);
-
-  const hearts = ["♡", "♥", "💗", "💕", "💖", "💘", "💞"];
-
-  // Create 200 hearts
-  for (let i = 0; i < 200; i++) {
-    const heart = document.createElement("span");
-
-    heart.textContent =
-      hearts[Math.floor(Math.random() * hearts.length)];
-
-    const size = 16 + Math.random() * 35;
-    const duration = 2.5 + Math.random() * 2.5;
-
-    heart.style.cssText = `
-      position: absolute;
-      left: ${Math.random() * 100}%;
-      top: ${Math.random() * 100}%;
-      font-size: ${size}px;
-      opacity: 0;
-      animation: loveRain ${duration}s ease-in forwards;
-      animation-delay: ${Math.random() * 0.8}s;
-    `;
-
-    layer.appendChild(heart);
+      createHearts();
+    });
   }
 
-  // Add animation
-  if (!document.getElementById("loveRainStyle")) {
-    const style = document.createElement("style");
-    style.id = "loveRainStyle";
+  // FULL SCREEN HEART ANIMATION
+  function createHearts() {
+    const oldLayer = document.getElementById("loveExplosion");
+    if (oldLayer) oldLayer.remove();
 
-    style.textContent = `
-      @keyframes loveRain {
-        0% {
-          opacity: 0;
-          transform: translateY(-30px) rotate(0deg) scale(0.5);
-        }
-        15% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-          transform: translateY(300px) rotate(360deg) scale(1.3);
-        }
-      }
-    `;
+    const layer = document.createElement("div");
+    layer.id = "loveExplosion";
 
-    document.head.appendChild(style);
-  }
+    layer.style.position = "fixed";
+    layer.style.top = "0";
+    layer.style.left = "0";
+    layer.style.width = "100%";
+    layer.style.height = "100%";
+    layer.style.overflow = "hidden";
+    layer.style.pointerEvents = "none";
+    layer.style.zIndex = "999999";
 
-  // Remove the animation layer after 6 seconds
-  setTimeout(() => {
-    layer.remove();
-  }, 6500);
-}
+    document.body.appendChild(layer);
 
+    const hearts = ["❤️", "💗", "💕", "💖", "💘", "💞", "♡"];
+
+    for (let i = 0; i < 200; i++) {
+      const heart = document.createElement("span");
+
+      heart.textContent =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.position = "absolute";
+      heart.style.left = Math.random() * 100 + "%";
+      heart.style.top = Math.random() * 100 + "%";
+      heart.style.fontSize = 15 + Math.random() * 30 + "px";
+      heart.style.display = "block";
+      heart.style.opacity = "1";
+      heart.style.transition = "transform 4s ease, opacity 4s ease";
+
+      layer.appendChild(heart);
+
+      const x = (Math.random() - 0.5) * 250;
+      const y = 200 + Math.random() * 500;
+      const rotation = Math.random() * 360;
 
       setTimeout(function () {
         heart.style.transform =
-          `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+          "translate(" + x + "px, " + y + "px) rotate(" +
+          rotation + "deg)";
         heart.style.opacity = "0";
-      }, 50);
-
-      setTimeout(function () {
-        heart.remove();
-      }, 4200);
+      }, 100);
     }
+
+    setTimeout(function () {
+      layer.remove();
+    }, 4500);
   }
 
   // CHAT BUTTON
@@ -130,12 +97,12 @@ createHearts() {
     envelopeButton.addEventListener("click", function () {
       loveLetter.classList.toggle("hidden");
 
-      if (loveLetter.classList.contains("hidden")) {
-        envelopeButton.querySelector(".envelope-label").textContent =
-          "Open your letter";
-      } else {
-        envelopeButton.querySelector(".envelope-label").textContent =
-          "Close your letter";
+      const label = envelopeButton.querySelector(".envelope-label");
+
+      if (label) {
+        label.textContent = loveLetter.classList.contains("hidden")
+          ? "Open your letter"
+          : "Close your letter";
       }
     });
   }
