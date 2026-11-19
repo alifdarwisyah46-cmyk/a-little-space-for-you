@@ -154,15 +154,53 @@ document.addEventListener("DOMContentLoaded", function () {
       bubble.appendChild(text);
       chatWindow.appendChild(bubble);
 
-      // Scroll inside chat only, not the whole website
       chatWindow.scrollTop = chatWindow.scrollHeight;
 
       return bubble;
     }
 
+
+    // TYPING INDICATOR
+
+    function addTypingIndicator() {
+
+      const bubble = document.createElement("div");
+      bubble.className = "chat-message ai-message typing-message";
+
+      const name = document.createElement("span");
+      name.className = "chat-name";
+      name.textContent = "A Little Alif ♡";
+
+      const text = document.createElement("p");
+      text.className = "typing-text";
+      text.textContent = "Saya tengah fikir jap sayang...";
+
+      const dots = document.createElement("span");
+      dots.className = "typing-dots";
+      dots.setAttribute("aria-hidden", "true");
+
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement("span");
+        dots.appendChild(dot);
+      }
+
+      text.appendChild(dots);
+
+      bubble.appendChild(name);
+      bubble.appendChild(text);
+
+      chatWindow.appendChild(bubble);
+
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+
+      return bubble;
+    }
+
+
+    // SEND MESSAGE
+
     chatForm.addEventListener("submit", async function (event) {
 
-      // Stop the browser's default form submission
       event.preventDefault();
       event.stopPropagation();
 
@@ -176,10 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sendChat.disabled = true;
       sendChat.textContent = "...";
 
-      const typing = addMessage(
-        "Give me a little moment... ♡",
-        "ai"
-      );
+      const typing = addTypingIndicator();
 
       try {
 
@@ -274,6 +309,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-
-
-
