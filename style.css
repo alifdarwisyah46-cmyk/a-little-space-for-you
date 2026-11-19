@@ -697,3 +697,146 @@ footer {
     margin-right: auto;
   }
 }
+
+/* =========================
+   A LITTLE ALIF CHAT DESIGN
+========================= */
+
+.chat-section {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chat-window {
+  width: 100%;
+  max-width: 720px;
+  height: 380px;
+  margin: 35px auto 0;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid #f3dce5;
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(180, 110, 140, 0.08);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+}
+
+.chat-message {
+  max-width: 82%;
+  padding: 14px 17px;
+  border-radius: 18px;
+  animation: chatAppear 0.3s ease;
+}
+
+.ai-message {
+  align-self: flex-start;
+  background: #fff0f5;
+  color: #684858;
+  border-bottom-left-radius: 5px;
+}
+
+.user-message {
+  align-self: flex-end;
+  background: #e8a9c0;
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.chat-name {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 7px;
+  opacity: 0.75;
+}
+
+.chat-message p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.chat-form {
+  max-width: 720px;
+  margin: 16px auto 0;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 15px 18px;
+  border: 1px solid #efd5df;
+  border-radius: 30px;
+  outline: none;
+  background: white;
+  color: #684858;
+  font-size: 14px;
+}
+
+.chat-form input:focus {
+  border-color: #d98eac;
+  box-shadow: 0 0 0 3px rgba(217, 142, 172, 0.12);
+}
+
+.chat-form button {
+  padding: 13px 23px;
+  border: none;
+  border-radius: 30px;
+  background: #d98eac;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.chat-form button:hover {
+  background: #c87999;
+  transform: translateY(-2px);
+}
+
+.chat-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-disclaimer {
+  margin-top: 14px;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+@keyframes chatAppear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .chat-window {
+    height: 340px;
+    padding: 16px;
+  }
+
+  .chat-form {
+    gap: 7px;
+  }
+
+  .chat-form button {
+    padding: 12px 16px;
+  }
+
+  .chat-message {
+    max-width: 90%;
+  }
+}
