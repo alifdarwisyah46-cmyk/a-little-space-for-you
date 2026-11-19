@@ -419,6 +419,172 @@ h1, h2, h3 {
   line-height: 2;
 }
 
+/* =========================
+   HIDDEN HEARTS GAME
+========================= */
+
+#hiddenHeartGame {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heart-counter {
+  position: fixed;
+  top: 90px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  min-width: 145px;
+  padding: 12px 16px;
+  background: rgba(255, 247, 250, 0.94);
+  border: 1px solid rgba(222, 145, 178, 0.4);
+  border-radius: 18px;
+  box-shadow: 0 5px 22px rgba(190, 110, 145, 0.15);
+  color: #9b647d;
+  font-size: 11px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  pointer-events: auto;
+}
+
+#loveLevel {
+  color: #b66c8d;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.heart-counter strong {
+  font-size: 17px;
+  color: #d477a0;
+  letter-spacing: 1px;
+}
+
+#heartCount {
+  display: inline-block;
+}
+
+#heartCount.count-pop {
+  animation: heartCountPop 0.4s ease;
+}
+
+@keyframes heartCountPop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.5);
+    color: #f04f91;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#lovePercentage {
+  color: #b58b9d;
+  font-size: 10px;
+}
+
+/* Hidden heart button */
+
+#hiddenHeartButton {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 226, 239, 0.92);
+  color: #d75b91;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  z-index: 1001;
+  box-shadow:
+    0 0 12px rgba(231, 133, 173, 0.4),
+    0 0 28px rgba(231, 133, 173, 0.22);
+  animation: hiddenHeartPulse 1.8s ease-in-out infinite;
+  transition:
+    left 0.55s ease,
+    top 0.55s ease,
+    opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#hiddenHeartButton:active {
+  transform: translate(-50%, -50%) scale(0.82);
+}
+
+@keyframes hiddenHeartPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 12px rgba(231, 133, 173, 0.4),
+      0 0 28px rgba(231, 133, 173, 0.22);
+  }
+
+  50% {
+    box-shadow:
+      0 0 20px rgba(231, 133, 173, 0.65),
+      0 0 40px rgba(231, 133, 173, 0.35);
+  }
+}
+
+/* =========================
+   AI TYPING INDICATOR
+========================= */
+
+.typing-text {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 3px;
+}
+
+.typing-dots span {
+  width: 5px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 50%;
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
 @keyframes floatHeart {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
@@ -465,6 +631,21 @@ h1, h2, h3 {
   .chat-window { height: 330px; }
 }
 
+@media (max-width: 600px) {
+  .heart-counter {
+    top: 78px;
+    right: 10px;
+    min-width: 130px;
+    padding: 9px 12px;
+  }
+
+  #hiddenHeartButton {
+    width: 44px;
+    height: 44px;
+    font-size: 27px;
+  }
+}
+
 @media (max-width: 480px) {
   .memory-grid { grid-template-columns: 1fr; }
   .memory-placeholder { height: 160px; }
@@ -475,51 +656,4 @@ h1, h2, h3 {
   .chat-form input { padding: 12px; font-size: 12px; }
   .chat-form button { padding: 11px 13px; font-size: 12px; }
   .chat-message { max-width: 90%; }
-}
-
-
-/* =========================
-   AI TYPING INDICATOR
-========================= */
-
-.typing-text {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 5px;
-}
-
-.typing-dots {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-left: 3px;
-}
-
-.typing-dots span {
-  width: 5px;
-  height: 5px;
-  background: currentColor;
-  border-radius: 50%;
-  animation: typingBounce 1.2s infinite ease-in-out;
-}
-
-.typing-dots span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typing-dots span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes typingBounce {
-  0%, 60%, 100% {
-    transform: translateY(0);
-    opacity: 0.45;
-  }
-
-  30% {
-    transform: translateY(-5px);
-    opacity: 1;
-  }
 }
