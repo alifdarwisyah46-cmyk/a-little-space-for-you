@@ -1,35 +1,41 @@
-const enterButton = document.getElementById("enterButton");
+// A LITTLE SPACE
+// Main interactions
 
-enterButton.addEventListener("click", function () {
+document.addEventListener("DOMContentLoaded", function () {
 
-  const welcome = document.querySelector(".welcome");
+  // SURPRISE BUTTON
 
-  welcome.innerHTML = `
-    <p class="eyebrow">YOU MADE IT HERE ♡</p>
+  const surpriseButton =
+    document.getElementById("surpriseButton");
 
-    <h1>I'm glad<br>you're here.</h1>
+  const surpriseMessage =
+    document.getElementById("surpriseMessage");
 
-    <p class="subtitle">
-      This little space belongs to you.
-      Take your time and explore.
-    </p>
+  if (surpriseButton && surpriseMessage) {
 
-    <button id="surpriseButton">
-      A little surprise ♡
-    </button>
+    surpriseButton.addEventListener("click", function () {
 
-    <p class="footer">
-      Made with love, just for you.
-    </p>
-  `;
+      surpriseMessage.textContent =
+        "Just a little reminder that you are special. ♡";
 
-  const surpriseButton = document.getElementById("surpriseButton");
+      createHearts(35);
 
-  surpriseButton.addEventListener("click", function () {
+      surpriseButton.textContent =
+        "One more time? ♡";
+
+    });
+
+  }
+
+
+  // HEART ANIMATION
+
+  function createHearts(amount) {
 
     const hearts = ["♡", "♥", "💕", "💗", "💖"];
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < amount; i++) {
+
       const heart = document.createElement("span");
 
       heart.textContent =
@@ -38,7 +44,9 @@ enterButton.addEventListener("click", function () {
       heart.style.position = "fixed";
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.top = "-30px";
-      heart.style.fontSize = (15 + Math.random() * 25) + "px";
+      heart.style.fontSize =
+        (15 + Math.random() * 25) + "px";
+
       heart.style.pointerEvents = "none";
       heart.style.zIndex = "9999";
 
@@ -48,18 +56,83 @@ enterButton.addEventListener("click", function () {
 
       heart.animate(
         [
-          { transform: "translateY(0) rotate(0deg)", opacity: 1 },
-          { transform: `translateY(110vh) rotate(360deg)`, opacity: 0 }
+          {
+            transform: "translateY(0) rotate(0deg)",
+            opacity: 1
+          },
+          {
+            transform: "translateY(110vh) rotate(360deg)",
+            opacity: 0
+          }
         ],
         {
           duration: duration,
-          easing: "ease-in",
+          easing: "ease-in"
         }
       );
 
-      setTimeout(() => heart.remove(), duration);
+      setTimeout(function () {
+        heart.remove();
+      }, duration);
+
     }
 
+  }
+
+
+  // CHAT BUTTON
+
+  const chatButton =
+    document.getElementById("chatButton");
+
+  if (chatButton) {
+
+    chatButton.addEventListener("click", function () {
+
+      alert(
+        "Your little AI companion is coming soon. ♡"
+      );
+
+    });
+
+  }
+
+
+  // NAVIGATION
+
+  const navLinks =
+    document.querySelectorAll('.nav-links a');
+
+  navLinks.forEach(function (link) {
+
+    link.addEventListener("click", function () {
+
+      navLinks.forEach(function (item) {
+        item.style.color = "";
+      });
+
+      link.style.color = "#bd7e91";
+
+    });
+
   });
+
+
+  // WELCOME BUTTON INTERACTION
+
+  const welcomeButton =
+    document.querySelector(".main-button");
+
+  if (welcomeButton) {
+
+    welcomeButton.addEventListener("mouseenter", function () {
+      welcomeButton.style.transform = "translateY(-3px)";
+    });
+
+    welcomeButton.addEventListener("mouseleave", function () {
+      welcomeButton.style.transform = "translateY(0)";
+    });
+
+  }
 
 });
