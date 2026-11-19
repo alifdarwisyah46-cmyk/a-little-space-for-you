@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,39 +11,14 @@
 
 <body>
 
-  <!-- PORTRAIT ROTATION SCREEN -->
-  <div id="rotateScreen" class="rotate-screen">
-    <div class="rotate-card">
-      <div class="rotate-decor">♡</div>
-
-      <div class="phone-icon">▯</div>
-
-      <p class="rotate-eyebrow">A LITTLE SPACE</p>
-
-      <h1>Something beautiful<br>awaits you.</h1>
-
-      <p class="rotate-description">
-        Turn your phone sideways to enter
-        our little world.
-      </p>
-
-      <div class="rotate-animation">↻</div>
-
-      <p class="rotate-footer">
-        A little space, made just for you ♡
-      </p>
-    </div>
-  </div>
-
-  <!-- NAVIGATION -->
   <header class="navbar">
     <a href="#home" class="logo">A Little Space ♡</a>
-
     <nav>
       <a href="#home">Home</a>
       <a href="#memories">Memories</a>
       <a href="#letters">Letters</a>
       <a href="#story">Our Story</a>
+      <a href="#chat">Chat</a>
     </nav>
   </header>
 
@@ -53,31 +27,28 @@
     <!-- HOME -->
     <section id="home" class="section hero">
       <p class="eyebrow">A LITTLE PLACE FOR US</p>
-
       <h1>Welcome to<br>my little space ♡</h1>
-
       <p class="subtitle">
         A tiny corner of the internet, made just for you.
       </p>
-
       <a href="#memories" class="primary-button">
         Explore our little world ♡
       </a>
-
       <div class="hero-decoration">♡</div>
+      <p class="landscape-hint">
+        A little tip: landscape mode is recommended for the best experience. ♡
+      </p>
     </section>
 
     <!-- MEMORIES -->
     <section id="memories" class="section memories-section">
       <p class="eyebrow">OUR LITTLE COLLECTION</p>
       <h2>Little moments, big feelings.</h2>
-
       <p class="section-description">
         Some moments are too precious to be forgotten.
       </p>
 
       <div class="memory-grid">
-
         <article class="memory-card">
           <div class="memory-placeholder">♡</div>
           <h3>Our beginning</h3>
@@ -95,7 +66,6 @@
           <h3>More to come</h3>
           <p>There are still so many moments waiting for us.</p>
         </article>
-
       </div>
     </section>
 
@@ -103,19 +73,14 @@
     <section id="letters" class="section letters-section">
       <p class="eyebrow">A LITTLE SOMETHING FOR YOU</p>
       <h2>A letter from me.</h2>
-
       <p class="section-description">
         I have something I want you to read.
       </p>
 
       <div class="envelope-container">
-        <button
-          id="envelopeButton"
-          class="envelope"
-          type="button"
-          aria-expanded="false"
-          aria-controls="loveLetter"
-        >
+        <button id="envelopeButton" class="envelope"
+          type="button" aria-expanded="false"
+          aria-controls="loveLetter">
           <span class="envelope-heart">♡</span>
           <span id="envelopeLabel" class="envelope-label">
             Open your letter
@@ -123,31 +88,23 @@
         </button>
       </div>
 
-      <article
-        id="loveLetter"
-        class="love-letter is-closed"
-        aria-hidden="true"
-      >
+      <article id="loveLetter" class="love-letter is-closed"
+        aria-hidden="true">
         <h3>Dear you,</h3>
-
         <p>
           I made this little space because I wanted to create
           something that belongs to us.
         </p>
-
         <p>
           It may be just a website, but every little detail
           comes with a thought of you.
         </p>
-
         <p>
           Thank you for being part of my days.
           I hope this little surprise makes you smile.
         </p>
-
         <p class="letter-signature">
-          With love,<br>
-          Always ♡
+          With love,<br>Always ♡
         </p>
       </article>
     </section>
@@ -158,7 +115,6 @@
       <h2>Our little story.</h2>
 
       <div class="story-timeline">
-
         <article class="story-item">
           <span class="story-dot">♡</span>
           <div>
@@ -182,7 +138,6 @@
             <p>There's still so much more to write.</p>
           </div>
         </article>
-
       </div>
     </section>
 
@@ -190,63 +145,64 @@
     <section id="surprise" class="section surprise-section">
       <p class="eyebrow">JUST FOR YOU</p>
       <h2>One little surprise.</h2>
-
       <p id="surpriseMessage">
         Whenever you need a little happiness, press this.
       </p>
-
-      <button
-        id="surpriseButton"
-        class="primary-button"
-        type="button"
-      >
+      <button id="surpriseButton" class="primary-button" type="button">
         Open your surprise ♡
       </button>
     </section>
 
+    <!-- CHAT -->
+    <section id="chat" class="section chat-section">
+      <p class="eyebrow">A LITTLE CONVERSATION</p>
+      <h2>A little chat with Alif.</h2>
 
-<!-- CHAT -->
-<section id="chat" class="section chat-section">
-  <p class="eyebrow">A LITTLE CONVERSATION</p>
-  <h2>A little chat with Alif.</h2>
+      <p class="section-description">
+        Whenever you need someone to listen, I'm here.
+        You can talk about anything.
+      </p>
 
-  <p class="section-description">
-    A little AI companion inspired by the way I talk.
-    Whenever you need someone to listen, I'm here.
-  </p>
+      <div class="chat-card">
 
-  <div id="chatWindow" class="chat-window">
-    <div class="chat-message ai-message">
-      <span class="chat-name">A Little Alif ♡</span>
-      <p>Heyy, how's your day going? You can talk to me about anything. ♡</p>
-    </div>
-  </div>
+        <div class="chat-header">
+          <div class="chat-avatar">♡</div>
+          <div>
+            <strong>A Little Alif</strong>
+            <span class="online-status">Here for a little chat</span>
+          </div>
+        </div>
 
-  <form id="chatForm" class="chat-form">
-    <input
-      id="chatInput"
-      type="text"
-      placeholder="Type something..."
-      autocomplete="off"
-      maxlength="4000"
-      required
-    >
+        <div id="chatWindow" class="chat-window" aria-live="polite">
+          <div class="chat-message ai-message">
+            <span class="chat-name">A Little Alif ♡</span>
+            <p>Heyy, how's your day going? You can talk to me about anything. ♡</p>
+          </div>
+        </div>
 
-    <button id="sendChat" type="submit">
-      Send ♡
-    </button>
-  </form>
+        <form id="chatForm" class="chat-form">
+          <input
+            id="chatInput"
+            type="text"
+            placeholder="Type something..."
+            autocomplete="off"
+            maxlength="4000"
+            required
+          >
+          <button id="sendChat" type="submit">Send ♡</button>
+        </form>
 
-  <p class="chat-disclaimer">
-    An AI companion inspired by Alif, not the real Alif.
-  </p>
-</section>
+        <p class="chat-disclaimer">
+          An AI companion inspired by Alif, not the real Alif.
+        </p>
+
+      </div>
+    </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section contact-section">
       <p class="eyebrow">BEYOND THIS LITTLE SPACE</p>
       <h2>Find me outside this website.</h2>
-
       <p>
         If you ever want to talk to the real me,
         you know where to find me.
@@ -264,14 +220,11 @@
 
   </main>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <p>Made with love, just for you ♡</p>
     <p>A Little Space · 2026</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script src="script.js"></script>
-
 </body>
 </html>
