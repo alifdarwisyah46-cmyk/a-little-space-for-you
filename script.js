@@ -1,6 +1,6 @@
- 
-document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
 
+ 
   // SURPRISE BUTTON
   const surpriseButton = document.getElementById("surpriseButton");
   const surpriseMessage = document.getElementById("surpriseMessage");
@@ -14,31 +14,42 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // FALLING HEARTS
+  // FULL SCREEN LOVE EXPLOSION
   function createHearts() {
-    for (let i = 0; i < 15; i++) {
+    const hearts = ["♡", "♥", "💗", "💕", "💖", "💘", "💞"];
+    
+    for (let i = 0; i < 120; i++) {
       const heart = document.createElement("div");
 
-      heart.textContent = "♡";
+      heart.textContent =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
       heart.style.position = "fixed";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top = "-20px";
-      heart.style.fontSize = "24px";
-      heart.style.color = "#e8a4b5";
+      heart.style.top = Math.random() * 100 + "vh";
+      heart.style.fontSize = (18 + Math.random() * 35) + "px";
+      heart.style.color = "#e88ca8";
       heart.style.pointerEvents = "none";
-      heart.style.zIndex = "9999";
-      heart.style.transition = "transform 3s linear, opacity 3s";
+      heart.style.zIndex = "99999";
+      heart.style.opacity = "1";
+      heart.style.transition =
+        "transform 4s ease-out, opacity 4s ease-out";
 
       document.body.appendChild(heart);
 
+      const x = (Math.random() - 0.5) * 500;
+      const y = (Math.random() - 0.5) * 900;
+      const rotation = Math.random() * 720;
+
       setTimeout(function () {
-        heart.style.transform = "translateY(110vh) rotate(360deg)";
+        heart.style.transform =
+          `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
         heart.style.opacity = "0";
       }, 50);
 
       setTimeout(function () {
         heart.remove();
-      }, 3200);
+      }, 4200);
     }
   }
 
