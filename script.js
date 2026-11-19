@@ -11,7 +11,7 @@
         "You are one of my favourite parts of life. ♡";
 
       
-function createHearts() {
+createHearts() {
   // Remove an old animation layer if one exists
   const oldLayer = document.getElementById("loveExplosion");
   if (oldLayer) oldLayer.remove();
