@@ -204,23 +204,43 @@
       </button>
     </section>
 
-    <!-- CHAT -->
-    <section id="chat" class="section chat-section">
-      <p class="eyebrow">A LITTLE CONVERSATION</p>
-      <h2>Wanna talk?</h2>
 
-      <p>
-        There's a little something here waiting to chat with you.
-      </p>
+<!-- CHAT -->
+<section id="chat" class="section chat-section">
+  <p class="eyebrow">A LITTLE CONVERSATION</p>
+  <h2>A little chat with Alif.</h2>
 
-      <button
-        id="chatButton"
-        class="primary-button"
-        type="button"
-      >
-        Let's talk ♡
-      </button>
-    </section>
+  <p class="section-description">
+    A little AI companion inspired by the way I talk.
+    Whenever you need someone to listen, I'm here.
+  </p>
+
+  <div id="chatWindow" class="chat-window">
+    <div class="chat-message ai-message">
+      <span class="chat-name">A Little Alif ♡</span>
+      <p>Heyy, how's your day going? You can talk to me about anything. ♡</p>
+    </div>
+  </div>
+
+  <form id="chatForm" class="chat-form">
+    <input
+      id="chatInput"
+      type="text"
+      placeholder="Type something..."
+      autocomplete="off"
+      maxlength="4000"
+      required
+    >
+
+    <button id="sendChat" type="submit">
+      Send ♡
+    </button>
+  </form>
+
+  <p class="chat-disclaimer">
+    An AI companion inspired by Alif, not the real Alif.
+  </p>
+</section>
 
     <!-- CONTACT -->
     <section id="contact" class="section contact-section">
