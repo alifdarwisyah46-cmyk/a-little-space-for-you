@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         loveLetter.classList.remove(
           "is-open", "from-side", "bomb-drop"
         );
+
         loveLetter.classList.add("is-closed");
 
         loveLetter.setAttribute("aria-hidden", "true");
@@ -108,6 +109,227 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
       layer.remove();
     }, 9500);
+  }
+
+
+  // =========================
+  // HIDDEN HEARTS GAME
+  // =========================
+
+  const hiddenHeartButton =
+    document.getElementById("hiddenHeartButton");
+
+  const heartCountDisplay =
+    document.getElementById("heartCount");
+
+  const loveLevelDisplay =
+    document.getElementById("loveLevel");
+
+  const lovePercentageDisplay =
+    document.getElementById("lovePercentage");
+
+  if (
+    hiddenHeartButton &&
+    heartCountDisplay &&
+    loveLevelDisplay &&
+    lovePercentageDisplay
+  ) {
+
+    const STORAGE_KEY = "littleHeartCount";
+
+    let heartTotal = 0;
+
+    // LOAD SAVED PROGRESS
+
+    try {
+      const savedCount = Number(
+        localStorage.getItem(STORAGE_KEY)
+      );
+
+      if (Number.isFinite(savedCount)) {
+        heartTotal = Math.max(
+          0,
+          Math.min(1000, Math.floor(savedCount))
+        );
+      }
+    } catch (error) {
+      console.warn("Could not load heart progress:", error);
+    }
+
+
+    // LOVE MESSAGES
+
+    function getLoveMessage(count) {
+
+      if (count >= 1000) {
+        return "I love you endlessly. Always. ❤️";
+      }
+
+      if (count >= 800) {
+        return "Unlimited love for you ♡";
+      }
+
+      if (count >= 600) {
+        return "Sayang lebih daripada yang awak tahu";
+      }
+
+      if (count >= 400) {
+        return "Sayang sangat-sangat 💗";
+      }
+
+      if (count >= 200) {
+        return "Makin susah nak berhenti sayang";
+      }
+
+      if (count >= 100) {
+        return "Sayang banyak tau!";
+      }
+
+      if (count >= 50) {
+        return "Mula sayang dah ♡";
+      }
+
+      if (count >= 1) {
+        return "Sayang sikit je...";
+      }
+
+      return "Tak sayang langsung 🥺";
+    }
+
+
+    // UPDATE COUNTER
+
+    function updateHeartCounter(animate) {
+
+      heartCountDisplay.textContent = heartTotal;
+
+      const percentage = Math.floor(
+        (heartTotal / 1000) * 100
+      );
+
+      loveLevelDisplay.textContent =
+        getLoveMessage(heartTotal);
+
+      lovePercentageDisplay.textContent =
+        percentage + "% love discovered";
+
+      if (animate) {
+
+        heartCountDisplay.classList.remove("count-pop");
+
+        void heartCountDisplay.offsetWidth;
+
+        heartCountDisplay.classList.add("count-pop");
+      }
+
+      hiddenHeartButton.setAttribute(
+        "aria-label",
+        "Find the hidden heart. " + heartTotal + " out of 1000 found."
+      );
+    }
+
+
+    // MOVE HEART TO RANDOM LOCATION
+
+    function moveHiddenHeart() {
+
+      const heartSize = 48;
+      const margin = 30;
+
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      const minX = margin;
+      const maxX = Math.max(
+        minX,
+        screenWidth - margin
+      );
+
+      const minY = Math.min(
+        110,
+        Math.max(30, screenHeight / 3)
+      );
+
+      const maxY = Math.max(
+        minY,
+        screenHeight - margin
+      );
+
+      let randomX =
+        minX + Math.random() * (maxX - minX);
+
+      let randomY =
+        minY + Math.random() * (maxY - minY);
+
+      // Avoid the counter area at the top-right.
+
+      if (
+        randomX > screenWidth - 165 &&
+        randomY < 165
+      ) {
+        randomX = Math.max(
+          margin,
+          randomX - 170
+        );
+      }
+
+      hiddenHeartButton.style.left = randomX + "px";
+      hiddenHeartButton.style.top = randomY + "px";
+    }
+
+
+    // COLLECT HEART
+
+    hiddenHeartButton.addEventListener("click", function () {
+
+      if (heartTotal >= 1000) return;
+
+      heartTotal++;
+
+      // SAVE PROGRESS
+
+      try {
+        localStorage.setItem(
+          STORAGE_KEY,
+          String(heartTotal)
+        );
+      } catch (error) {
+        console.warn("Could not save heart progress:", error);
+      }
+
+      // UPDATE COUNTER AND MESSAGE
+
+      updateHeartCounter(true);
+
+      // MOVE HEART
+
+      if (heartTotal < 1000) {
+        moveHiddenHeart();
+      } else {
+        hiddenHeartButton.style.display = "none";
+      }
+
+    });
+
+
+    // INITIALISE GAME
+
+    updateHeartCounter(false);
+
+    if (heartTotal >= 1000) {
+      hiddenHeartButton.style.display = "none";
+    } else {
+      moveHiddenHeart();
+    }
+
+    // ADJUST POSITION WHEN SCREEN RESIZES
+
+    window.addEventListener("resize", function () {
+      if (heartTotal < 1000) {
+        moveHiddenHeart();
+      }
+    });
+
   }
 
 
