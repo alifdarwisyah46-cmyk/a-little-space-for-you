@@ -10,36 +10,83 @@
       surpriseMessage.textContent =
         "You are one of my favourite parts of life. ♡";
 
-      createHearts();
-    });
+      
+function createHearts() {
+  // Remove an old animation layer if one exists
+  const oldLayer = document.getElementById("loveExplosion");
+  if (oldLayer) oldLayer.remove();
+
+  // Create a full-screen layer
+  const layer = document.createElement("div");
+  layer.id = "loveExplosion";
+
+  layer.style.cssText = `
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2147483647;
+  `;
+
+  document.body.appendChild(layer);
+
+  const hearts = ["♡", "♥", "💗", "💕", "💖", "💘", "💞"];
+
+  // Create 200 hearts
+  for (let i = 0; i < 200; i++) {
+    const heart = document.createElement("span");
+
+    heart.textContent =
+      hearts[Math.floor(Math.random() * hearts.length)];
+
+    const size = 16 + Math.random() * 35;
+    const duration = 2.5 + Math.random() * 2.5;
+
+    heart.style.cssText = `
+      position: absolute;
+      left: ${Math.random() * 100}%;
+      top: ${Math.random() * 100}%;
+      font-size: ${size}px;
+      opacity: 0;
+      animation: loveRain ${duration}s ease-in forwards;
+      animation-delay: ${Math.random() * 0.8}s;
+    `;
+
+    layer.appendChild(heart);
   }
 
-  // FULL SCREEN LOVE EXPLOSION
-  function createHearts() {
-    const hearts = ["♡", "♥", "💗", "💕", "💖", "💘", "💞"];
-    
-    for (let i = 0; i < 120; i++) {
-      const heart = document.createElement("div");
+  // Add animation
+  if (!document.getElementById("loveRainStyle")) {
+    const style = document.createElement("style");
+    style.id = "loveRainStyle";
 
-      heart.textContent =
-        hearts[Math.floor(Math.random() * hearts.length)];
+    style.textContent = `
+      @keyframes loveRain {
+        0% {
+          opacity: 0;
+          transform: translateY(-30px) rotate(0deg) scale(0.5);
+        }
+        15% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(300px) rotate(360deg) scale(1.3);
+        }
+      }
+    `;
 
-      heart.style.position = "fixed";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.top = Math.random() * 100 + "vh";
-      heart.style.fontSize = (18 + Math.random() * 35) + "px";
-      heart.style.color = "#e88ca8";
-      heart.style.pointerEvents = "none";
-      heart.style.zIndex = "99999";
-      heart.style.opacity = "1";
-      heart.style.transition =
-        "transform 4s ease-out, opacity 4s ease-out";
+    document.head.appendChild(style);
+  }
 
-      document.body.appendChild(heart);
+  // Remove the animation layer after 6 seconds
+  setTimeout(() => {
+    layer.remove();
+  }, 6500);
+}
 
-      const x = (Math.random() - 0.5) * 500;
-      const y = (Math.random() - 0.5) * 900;
-      const rotation = Math.random() * 720;
 
       setTimeout(function () {
         heart.style.transform =
