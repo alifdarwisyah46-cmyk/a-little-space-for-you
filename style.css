@@ -448,25 +448,29 @@ nav a.active {
   animation-fill-mode: forwards;
 }
 
+
 @keyframes heartFall {
   0% {
-    transform: translate3d(0, -30px, 0) rotate(0deg) scale(0.6);
     opacity: 0;
+    transform: translate3d(0, -40px, 0) rotate(0deg) scale(.5);
   }
 
-  10% {
+  12% {
     opacity: 1;
   }
 
-  90% {
-    opacity: 1;
+  50% {
+    transform: translate3d(var(--drift), 45vh, 0)
+      rotate(250deg) scale(1.1);
   }
 
   100% {
-    transform: translate3d(40px, 110vh, 0) rotate(540deg) scale(1.2);
     opacity: 0;
+    transform: translate3d(var(--drift), 110vh, 0)
+      rotate(600deg) scale(.8);
   }
 }
+
 
 /* CHAT */
 
