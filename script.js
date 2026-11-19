@@ -87,59 +87,59 @@ document.addEventListener("DOMContentLoaded", function () {
   // FULL SCREEN HEARTS
   // =========================
 
-  function createHearts() {
+  
+function createHearts() {
 
-    const oldLayer = document.getElementById("loveExplosion");
+  const oldLayer = document.getElementById("loveExplosion");
 
-    if (oldLayer) {
-      oldLayer.remove();
-    }
+  if (oldLayer) oldLayer.remove();
 
-    const layer = document.createElement("div");
-    layer.id = "loveExplosion";
+  const layer = document.createElement("div");
+  layer.id = "loveExplosion";
 
-    document.body.appendChild(layer);
+  document.body.appendChild(layer);
 
-    const heartTypes = [
-      "❤️", "💗", "💕", "💖",
-      "💘", "💞", "♡", "♥"
-    ];
+  const symbols = [
+    "❤️", "💗", "💕", "💖",
+    "💘", "💞", "♥", "♡"
+  ];
 
-    const totalHearts = 180;
+  // 350 hearts
+  for (let i = 0; i < 350; i++) {
 
-    for (let i = 0; i < totalHearts; i++) {
+    const heart = document.createElement("span");
 
-      const heart = document.createElement("span");
+    heart.className = "flying-heart";
 
-      heart.className = "flying-heart";
+    heart.textContent =
+      symbols[Math.floor(Math.random() * symbols.length)];
 
-      heart.textContent =
-        heartTypes[Math.floor(Math.random() * heartTypes.length)];
+    const size = 16 + Math.random() * 35;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const duration = 3 + Math.random() * 4;
+    const delay = Math.random() * 1.5;
 
-      const size = 18 + Math.random() * 30;
-      const left = Math.random() * 100;
-      const duration = 3 + Math.random() * 3;
-      const delay = Math.random() * 2;
+    heart.style.left = x + "vw";
+    heart.style.top = y + "vh";
+    heart.style.fontSize = size + "px";
 
-      heart.style.left = left + "vw";
-      heart.style.fontSize = size + "px";
+    heart.style.animationDuration = duration + "s";
+    heart.style.animationDelay = delay + "s";
 
-      heart.style.animationDuration = duration + "s";
-      heart.style.animationDelay = delay + "s";
+    heart.style.setProperty(
+      "--drift",
+      (Math.random() * 300 - 150) + "px"
+    );
 
-      layer.appendChild(heart);
-
-    }
-
-    setTimeout(function () {
-
-      if (layer.parentNode) {
-        layer.remove();
-      }
-
-    }, 8500);
-
+    layer.appendChild(heart);
   }
+
+  setTimeout(function () {
+    layer.remove();
+  }, 9500);
+
+}
 
 
   // =========================
