@@ -840,3 +840,37 @@ footer {
     max-width: 90%;
   }
 }
+
+/* Allow both portrait and landscape */
+
+@media (orientation: portrait) {
+  #rotateScreen {
+    display: none !important;
+  }
+
+  body > header,
+  body > main,
+  body > footer {
+    visibility: visible !important;
+  }
+}
+
+/* Make chat controls tappable */
+
+.chat-form {
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+}
+
+.chat-form input,
+.chat-form button {
+  position: relative;
+  z-index: 21;
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.chat-form button:disabled {
+  pointer-events: none;
+}
