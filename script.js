@@ -1,111 +1,182 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // SURPRISE BUTTON
+  // =========================
+  // LITTLE LETTERS
+  // =========================
+
+  const envelopeButton = document.getElementById("envelopeButton");
+  const loveLetter = document.getElementById("loveLetter");
+  const envelopeLabel = document.getElementById("envelopeLabel");
+
+  if (envelopeButton && loveLetter) {
+
+    envelopeButton.addEventListener("click", function () {
+
+      const isClosed = loveLetter.hidden;
+
+      loveLetter.hidden = !isClosed;
+
+      envelopeButton.setAttribute(
+        "aria-expanded",
+        String(isClosed)
+      );
+
+      if (envelopeLabel) {
+        envelopeLabel.textContent = isClosed
+          ? "Close your letter"
+          : "Open your letter";
+      }
+
+    });
+
+  }
+
+
+  // =========================
+  // OPEN SURPRISE
+  // =========================
+
   const surpriseButton = document.getElementById("surpriseButton");
   const surpriseMessage = document.getElementById("surpriseMessage");
 
   if (surpriseButton) {
+
     surpriseButton.addEventListener("click", function () {
+
       if (surpriseMessage) {
         surpriseMessage.textContent =
           "You are one of my favourite parts of life. ♡";
       }
 
       createHearts();
+
     });
+
   }
 
-  // HEART ANIMATION
+
+  // =========================
+  // FULL SCREEN HEARTS
+  // =========================
+
   function createHearts() {
+
     const oldLayer = document.getElementById("loveExplosion");
-    if (oldLayer) oldLayer.remove();
+
+    if (oldLayer) {
+      oldLayer.remove();
+    }
 
     const layer = document.createElement("div");
     layer.id = "loveExplosion";
 
-    layer.style.cssText =
-      "position:fixed;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:999999;";
-
     document.body.appendChild(layer);
 
-    const symbols = ["❤️", "💗", "💕", "💖", "💘", "♡"];
+    const heartTypes = [
+      "❤️", "💗", "💕", "💖",
+      "💘", "💞", "♡", "♥"
+    ];
 
-    for (let i = 0; i < 200; i++) {
+    const totalHearts = 180;
+
+    for (let i = 0; i < totalHearts; i++) {
+
       const heart = document.createElement("span");
 
-      heart.textContent =
-        symbols[Math.floor(Math.random() * symbols.length)];
+      heart.className = "flying-heart";
 
-      heart.style.cssText = `
-        position:absolute;
-        left:${Math.random() * 100}%;
-        top:${Math.random() * 100}%;
-        font-size:${16 + Math.random() * 25}px;
-        animation: heartFall ${3 + Math.random() * 2}s ease forwards;
-      `;
+      heart.textContent =
+        heartTypes[Math.floor(Math.random() * heartTypes.length)];
+
+      const size = 18 + Math.random() * 30;
+      const left = Math.random() * 100;
+      const duration = 3 + Math.random() * 3;
+      const delay = Math.random() * 2;
+
+      heart.style.left = left + "vw";
+      heart.style.fontSize = size + "px";
+
+      heart.style.animationDuration = duration + "s";
+      heart.style.animationDelay = delay + "s";
 
       layer.appendChild(heart);
-    }
 
-    if (!document.getElementById("heartAnimationStyle")) {
-      const style = document.createElement("style");
-      style.id = "heartAnimationStyle";
-
-      style.textContent = `
-        @keyframes heartFall {
-          0% { opacity: 0; transform: translateY(-30px) rotate(0deg); }
-          15% { opacity: 1; }
-          100% { opacity: 0; transform: translateY(500px) rotate(360deg); }
-        }
-      `;
-
-      document.head.appendChild(style);
     }
 
     setTimeout(function () {
-      layer.remove();
-    }, 5500);
-  }
 
-  // LITTLE LETTERS
-  const envelopeButton = document.getElementById("envelopeButton");
-  const loveLetter = document.getElementById("loveLetter");
-
-  if (envelopeButton && loveLetter) {
-    envelopeButton.addEventListener("click", function () {
-      loveLetter.classList.toggle("hidden");
-
-      const label = envelopeButton.querySelector(".envelope-label");
-
-      if (label) {
-        label.textContent = loveLetter.classList.contains("hidden")
-          ? "Open your letter"
-          : "Close your letter";
+      if (layer.parentNode) {
+        layer.remove();
       }
-    });
+
+    }, 8500);
+
   }
 
+
+  // =========================
   // CHAT BUTTON
+  // =========================
+
   const chatButton = document.getElementById("chatButton");
 
   if (chatButton) {
+
     chatButton.addEventListener("click", function () {
+
       alert("Your little AI companion is coming soon. ♡");
+
     });
+
   }
 
+
+  // =========================
   // NAVIGATION
+  // =========================
+
   const navLinks = document.querySelectorAll("nav a");
 
   navLinks.forEach(function (link) {
+
     link.addEventListener("click", function () {
+
       navLinks.forEach(function (item) {
         item.classList.remove("active");
       });
 
       link.classList.add("active");
+
     });
+
+  });
+
+
+  // =========================
+  // SMOOTH SCROLL
+  // =========================
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+
+    link.addEventListener("click", function (event) {
+
+      const target = document.querySelector(
+        link.getAttribute("href")
+      );
+
+      if (target) {
+        event.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+    });
+
   });
 
 });
+
