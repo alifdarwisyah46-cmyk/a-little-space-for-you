@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
   // =========================
+  
   // LITTLE LETTERS
-  // =========================
 
   const envelopeButton = document.getElementById("envelopeButton");
   const loveLetter = document.getElementById("loveLetter");
@@ -13,19 +13,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
     envelopeButton.addEventListener("click", function () {
 
-      const isClosed = loveLetter.hidden;
+      const isClosed = !loveLetter.classList.contains("is-open");
 
-      loveLetter.hidden = !isClosed;
+      if (isClosed) {
 
-      envelopeButton.setAttribute(
-        "aria-expanded",
-        String(isClosed)
-      );
+        // Random entrance animation
+        loveLetter.classList.remove("from-side", "bomb-drop");
 
-      if (envelopeLabel) {
-        envelopeLabel.textContent = isClosed
-          ? "Close your letter"
-          : "Open your letter";
+        const animations = ["from-side", "bomb-drop"];
+        const selected =
+          animations[Math.floor(Math.random() * animations.length)];
+
+        loveLetter.classList.add(selected);
+        loveLetter.classList.remove("is-closed");
+
+        // Start opening animation
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            loveLetter.classList.add("is-open");
+          });
+        });
+
+        loveLetter.setAttribute("aria-hidden", "false");
+        envelopeButton.setAttribute("aria-expanded", "true");
+
+        if (envelopeLabel) {
+          envelopeLabel.textContent = "Close your letter";
+        }
+
+      } else {
+
+        loveLetter.classList.remove("is-open");
+        loveLetter.classList.add("is-closed");
+
+        loveLetter.setAttribute("aria-hidden", "true");
+        envelopeButton.setAttribute("aria-expanded", "false");
+
+        if (envelopeLabel) {
+          envelopeLabel.textContent = "Open your letter";
+        }
+
       }
 
     });
