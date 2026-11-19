@@ -1,19 +1,22 @@
+
 document.addEventListener("DOMContentLoaded", function () {
 
   // SURPRISE BUTTON
   const surpriseButton = document.getElementById("surpriseButton");
   const surpriseMessage = document.getElementById("surpriseMessage");
 
-  if (surpriseButton && surpriseMessage) {
+  if (surpriseButton) {
     surpriseButton.addEventListener("click", function () {
-      surpriseMessage.textContent =
-        "You are one of my favourite parts of life. ♡";
+      if (surpriseMessage) {
+        surpriseMessage.textContent =
+          "You are one of my favourite parts of life. ♡";
+      }
 
       createHearts();
     });
   }
 
-  // FULL SCREEN HEART ANIMATION
+  // HEART ANIMATION
   function createHearts() {
     const oldLayer = document.getElementById("loveExplosion");
     if (oldLayer) oldLayer.remove();
@@ -21,73 +24,49 @@ document.addEventListener("DOMContentLoaded", function () {
     const layer = document.createElement("div");
     layer.id = "loveExplosion";
 
-    layer.style.position = "fixed";
-    layer.style.top = "0";
-    layer.style.left = "0";
-    layer.style.width = "100%";
-    layer.style.height = "100%";
-    layer.style.overflow = "hidden";
-    layer.style.pointerEvents = "none";
-    layer.style.zIndex = "999999";
+    layer.style.cssText =
+      "position:fixed;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:999999;";
 
     document.body.appendChild(layer);
 
-    const hearts = ["❤️", "💗", "💕", "💖", "💘", "💞", "♡"];
+    const symbols = ["❤️", "💗", "💕", "💖", "💘", "♡"];
 
     for (let i = 0; i < 200; i++) {
       const heart = document.createElement("span");
 
       heart.textContent =
-        hearts[Math.floor(Math.random() * hearts.length)];
+        symbols[Math.floor(Math.random() * symbols.length)];
 
-      heart.style.position = "absolute";
-      heart.style.left = Math.random() * 100 + "%";
-      heart.style.top = Math.random() * 100 + "%";
-      heart.style.fontSize = 15 + Math.random() * 30 + "px";
-      heart.style.display = "block";
-      heart.style.opacity = "1";
-      heart.style.transition = "transform 4s ease, opacity 4s ease";
+      heart.style.cssText = `
+        position:absolute;
+        left:${Math.random() * 100}%;
+        top:${Math.random() * 100}%;
+        font-size:${16 + Math.random() * 25}px;
+        animation: heartFall ${3 + Math.random() * 2}s ease forwards;
+      `;
 
       layer.appendChild(heart);
+    }
 
-      const x = (Math.random() - 0.5) * 250;
-      const y = 200 + Math.random() * 500;
-      const rotation = Math.random() * 360;
+    if (!document.getElementById("heartAnimationStyle")) {
+      const style = document.createElement("style");
+      style.id = "heartAnimationStyle";
 
-      setTimeout(function () {
-        heart.style.transform =
-          "translate(" + x + "px, " + y + "px) rotate(" +
-          rotation + "deg)";
-        heart.style.opacity = "0";
-      }, 100);
+      style.textContent = `
+        @keyframes heartFall {
+          0% { opacity: 0; transform: translateY(-30px) rotate(0deg); }
+          15% { opacity: 1; }
+          100% { opacity: 0; transform: translateY(500px) rotate(360deg); }
+        }
+      `;
+
+      document.head.appendChild(style);
     }
 
     setTimeout(function () {
       layer.remove();
-    }, 4500);
+    }, 5500);
   }
-
-  // CHAT BUTTON
-  const chatButton = document.getElementById("chatButton");
-
-  if (chatButton) {
-    chatButton.addEventListener("click", function () {
-      alert("Your little AI companion is coming soon. ♡");
-    });
-  }
-
-  // NAVIGATION HIGHLIGHT
-  const navLinks = document.querySelectorAll("nav a");
-
-  navLinks.forEach(function (link) {
-    link.addEventListener("click", function () {
-      navLinks.forEach(function (item) {
-        item.classList.remove("active");
-      });
-
-      link.classList.add("active");
-    });
-  });
 
   // LITTLE LETTERS
   const envelopeButton = document.getElementById("envelopeButton");
@@ -106,5 +85,27 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // CHAT BUTTON
+  const chatButton = document.getElementById("chatButton");
+
+  if (chatButton) {
+    chatButton.addEventListener("click", function () {
+      alert("Your little AI companion is coming soon. ♡");
+    });
+  }
+
+  // NAVIGATION
+  const navLinks = document.querySelectorAll("nav a");
+
+  navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      navLinks.forEach(function (item) {
+        item.classList.remove("active");
+      });
+
+      link.classList.add("active");
+    });
+  });
 
 });
